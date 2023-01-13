@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Domain", "EasyCash
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.Infrastructure", "EasyCash.Infrastructure\EasyCash.Infrastructure.csproj", "{1CD7253F-BEF0-459B-BA16-B485A62822B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyCash.UnitTests", "EasyCash.UnitTests\EasyCash.UnitTests.csproj", "{5D8252EF-B5B2-4189-8B38-184D5A1D75F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{1CD7253F-BEF0-459B-BA16-B485A62822B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD7253F-BEF0-459B-BA16-B485A62822B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD7253F-BEF0-459B-BA16-B485A62822B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D8252EF-B5B2-4189-8B38-184D5A1D75F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8252EF-B5B2-4189-8B38-184D5A1D75F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8252EF-B5B2-4189-8B38-184D5A1D75F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8252EF-B5B2-4189-8B38-184D5A1D75F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
