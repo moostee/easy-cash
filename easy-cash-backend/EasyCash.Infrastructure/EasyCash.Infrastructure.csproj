@@ -2,8 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+
+   <ItemGroup>
+    <ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj" />
+    <ProjectReference Include="..\EasyCash.Application\EasyCash.Application.csproj" />
+    <ProjectReference Include="..\EasyCash.Shared\EasyCash.Shared.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,7 @@
+using EasyCash.Middlewares;
 using EasyCash.Application;
+using EasyCash.Api;
+using EasyCash.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +15,12 @@ builder.Configuration
 builder.Services.AddCors();
 
 builder.Services
-            .AddApplication(builder.Configuration);
+            .AddApplication(builder.Configuration)
+            .AddInfrastructure(builder.Configuration)
+            .ConfigureAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 
@@ -35,7 +38,11 @@ app.UseCors(options =>
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

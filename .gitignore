@@ -323,6 +323,8 @@ __pycache__/
 # Icon must end with two \r
 Icon
 
+.vscode/*
+
 
 # Thumbnails
 ._*
