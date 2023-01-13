@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+   <ItemGroup>
+    <ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj"/>
+    <ProjectReference Include="..\EasyCash.Shared\EasyCash.Shared.csproj"/>
+  </ItemGroup>
 
 </Project>

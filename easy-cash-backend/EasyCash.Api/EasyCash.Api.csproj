@@ -10,4 +10,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EasyCash.Domain\EasyCash.Domain.csproj" />
+    <ProjectReference Include="..\EasyCash.Application\EasyCash.Application.csproj" />
+    <ProjectReference Include="..\EasyCash.Shared\EasyCash.Shared.csproj" />
+    <ProjectReference Include="..\EasyCash.Infrastructure\EasyCash.Infrastructure.csproj" />
+  </ItemGroup>
+
+
 </Project>
