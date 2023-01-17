@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <span>Quick Loan Web</span>
+    
+    <span class="spacer"></span>
+    <button mat-button><a href="https://localhost:7024/swagger/index.html">API Documentation</a></button>
+    <button mat-button><a href="">Github Repo</a></button>
+    <button mat-icon-button *ngIf="loggedIn">
+        <mat-icon [matMenuTriggerFor]="userMenu">person</mat-icon>
+    </button>
+    <mat-menu #userMenu xPosition="before">
+        <button mat-menu-item (click)="logOut()">Logout</button>
+    </mat-menu>
+</mat-toolbar>
