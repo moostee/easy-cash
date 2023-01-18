@@ -1,0 +1,29 @@
+<app-toolbar [loggedIn]="true"></app-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="side">
+
+        <mat-nav-list>
+            <mat-list-item>
+                <a matLine routerLink="/admin/loans">Loans</a>
+                <button mat-icon-button>
+                    <mat-icon>monetization_on</mat-icon>
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <a matLine routerLink="/admin/users">Users</a>
+                <button mat-icon-button>
+                    <mat-icon>verified_user</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-nav-list>
+
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-button (click)="opened=!opened">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
