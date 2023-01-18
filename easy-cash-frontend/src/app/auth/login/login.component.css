@@ -1,0 +1,12 @@
+.remove-padding mat-card {
+    padding: 0px;
+}
+
+.login-form
+{
+    padding: 20px;
+}
+.background-color{
+    background-color: gainsboro;
+    height: 600px;
+}
