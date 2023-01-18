@@ -1,0 +1,10 @@
+h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    min-height: 94vh;
+}

@@ -1,0 +1,25 @@
+<h2> New Loan Application</h2>
+
+<form class="example-form" [formGroup]="newApplicationForm">
+    <p>
+        <strong> Percentage 4% </strong>
+    </p>
+    <p>
+        <mat-form-field appearance="legacy">
+            <mat-label>Loan Reason</mat-label>
+            <input formControlName="reason" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="loanAmount" placeholder="loan amount">
+        </mat-form-field>
+    </p>
+    <p>
+
+        <button *ngIf="!showSpinner" mat-raised-button color="primary" [disabled]='!newApplicationForm.valid'
+            (click)="createLoan(newApplicationForm.value)">Apply</button>
+        <mat-spinner [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+    </p>
+</form>
