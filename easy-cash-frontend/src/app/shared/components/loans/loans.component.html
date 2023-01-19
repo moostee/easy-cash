@@ -3,7 +3,7 @@
     <!-- <button mat-raised-button>
         <mat-icon>add</mat-icon>Create
     </button> -->
-    <mat-form-field class="search-form-field" floatLabel="never">
+    <mat-form-field class="search-form-field">
         <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter($event)" #input>
         <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear($event)">
             <mat-icon>close</mat-icon>

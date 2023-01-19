@@ -6,7 +6,7 @@ import { Role } from "./core/interfaces/Role";
 const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: () => import('../../src/app/admin/admin.module').then(m => m.AdminModule),
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard],
     data: {
       role: Role.Admin
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('../../src/app/loan-user/loan-user.module').then(m => m.LoanUserModule),
+    loadChildren: () => import('./loan-user/loan-user.module').then(m => m.LoanUserModule),
     canActivate: [AuthGuard],
     data: {
       role: Role.LoanUser
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('../../src/app/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: '',
