@@ -35,11 +35,11 @@
         </ng-container>
         <ng-container matColumnDef="createdOn">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Created On</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.createdOn}}</mat-cell>
+            <mat-cell *matCellDef="let element">{{element.createdOn | date:'medium' }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="modifiedOn">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Modified On</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.modifiedOn}}</mat-cell>
+            <mat-cell *matCellDef="let element">{{element.modifiedOn | date:'medium' }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>

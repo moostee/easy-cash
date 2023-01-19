@@ -13,7 +13,7 @@ export class LoanDetailsComponent implements OnInit {
 
   loanRepayment: LoanRepayment[] = [];
 
-  displayedColumns: string[] = ['amount', 'duedate', 'status'];
+  displayedColumns: string[] = ['amount', 'duedate', 'status' ];
 
   constructor(private _loanRepaymentService: LoanRepaymentService) { }
 

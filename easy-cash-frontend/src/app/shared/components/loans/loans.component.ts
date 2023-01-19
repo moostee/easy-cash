@@ -34,6 +34,7 @@ export class LoansComponent implements OnInit {
   searchKey!: string;
 
   userId: number = 0;
+  userRole: number = 0;
 
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
@@ -44,10 +45,10 @@ export class LoansComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let userRole = this._tokenService.getUser().role;
+    this.userRole = this._tokenService.getUser().role;
     this.userId = this._tokenService.getUser().id;
 
-    if (userRole == Role.LoanUser) {
+    if (this.userRole == Role.LoanUser) {
       this._loanService.getLoanByUserId(this.userId).subscribe(result => {
         this.loans = result.responseObject;
 

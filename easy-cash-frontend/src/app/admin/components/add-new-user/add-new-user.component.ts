@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateUser } from 'src/app/core/interfaces/User';
 import { UserService } from 'src/app/core/services/user.service';
@@ -31,7 +31,7 @@ export class AddNewUserComponent implements OnInit {
       ])),
 
       password: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required, Validators.minLength(8)
       ])),
 
       confirmPassword: new FormControl('', Validators.compose([
@@ -45,7 +45,7 @@ export class AddNewUserComponent implements OnInit {
       isActive: new FormControl(false, Validators.compose([
         Validators.required
       ]))
-    })
+    }, { validators: passwordMatchingValidatior })
 
   }
 
@@ -79,4 +79,11 @@ export class AddNewUserComponent implements OnInit {
   }
 
 }
+
+export const passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+
+  return password?.value === confirmPassword?.value ? null : { notmatched: true };
+};
 

@@ -6,11 +6,11 @@ using EasyCash.Shared;
 
 namespace EasyCash.Application.UseCases.Loan.RepayLoan;
 
-internal class AddLoanCommandHandler : ICommandHandler<RepayLoanCommand, Result<string>>
+internal class RepayLoanCommandHandler : ICommandHandler<RepayLoanCommand, Result<string>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public AddLoanCommandHandler(IUnitOfWork unitOfWork)
+    public RepayLoanCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }

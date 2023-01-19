@@ -16,7 +16,7 @@ public class LoanRepaymentController : BaseController
     }
 
     [HttpGet("{loanId}")]
-    public async Task<IActionResult> GetWalletByUserIdAsync([Required] int loanId)
+    public async Task<IActionResult> GetLoanRepaymentByLoanId([Required] int loanId)
     {
         return Ok(await _mediator.Send(new GetLoanRepaymentByLoanIdQuery(loanId)));
     }

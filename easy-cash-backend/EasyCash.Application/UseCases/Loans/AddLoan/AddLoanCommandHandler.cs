@@ -39,7 +39,7 @@ internal class AddLoanCommandHandler : ICommandHandler<AddLoanCommand, Result<st
         await _unitOfWork.LoanRepository.AddAsync(loan);
         await _unitOfWork.CompleteAsync();
 
-        //create loan repayment and update wallet.. . I can use INotificationHandler for optimization
+        //::TODO create loan repayment and update wallet.. . I can use INotificationHandler for optimization
         var loanRepayment = LoanRepayments.Create(loan, RepaymentStatus.Ongoing.ToString(), endDate, startDate);
         await _unitOfWork.LoanRepaymentRepository.AddAsync(loanRepayment);
 

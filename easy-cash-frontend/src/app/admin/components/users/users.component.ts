@@ -100,7 +100,8 @@ export class UsersComponent implements OnInit {
     }).subscribe(result => {
       this._snackBar.open(`Successful`, 'Ok', {
         duration: 3000
-      })
+      });
+      
     }, err => console.log(err));
   }
 
