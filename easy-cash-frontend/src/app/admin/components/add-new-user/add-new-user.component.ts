@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CreateUser } from 'src/app/core/interfaces/User';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -16,7 +17,8 @@ export class AddNewUserComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _snackBar: MatSnackBar,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -61,7 +63,7 @@ export class AddNewUserComponent implements OnInit {
       role: form.role,
       confirmPassword: form.confirmPassword
     }
-    
+
     this._userService.addNewUser(user).subscribe(result => {
 
       this.showSpinner = false;
@@ -71,7 +73,11 @@ export class AddNewUserComponent implements OnInit {
       console.log(result)
       this._snackBar.open(`Successfully added ${form.name}`, 'Ok', {
         duration: 3000
-      })
+      });
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/users');
+      }, 3000);
+
     },
       err => {
         this.showSpinner = false;

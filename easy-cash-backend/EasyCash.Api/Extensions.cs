@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -67,4 +68,23 @@ public static class Extensions
 
         return services;
     }
+
+    // public static WebApplication RunMigration<T>(this WebApplication webApplication) where T : DbContext
+    // {
+    //     using (var scope = webApplication.Services.CreateScope())
+    //     {
+    //         var services = scope.ServiceProvider;
+    //         try
+    //         {
+    //             var db = services.GetRequiredService<T>();
+    //             db.Database.Migrate();
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             var logger = services.GetRequiredService<ILogger<Program>>();
+    //             logger.LogError(ex, "An error occurred while migrating the database.");
+    //         }
+    //     }
+    //     return webApplication;
+    // }
 }

@@ -1,4 +1,5 @@
 import { User } from "./User";
+import { Validator } from 'fluentvalidation-ts';
 
 
 export interface Loan {
@@ -62,6 +63,7 @@ export interface Wallet {
     modifiedBy?: any;
     modifiedOn: Date;
 }
+
 
 
 

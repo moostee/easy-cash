@@ -105,6 +105,7 @@ export class LoansComponent implements OnInit {
     dialogRef.componentInstance.loan = loan;
 
     dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
     });
   }
 
@@ -114,6 +115,7 @@ export class LoansComponent implements OnInit {
       this._snackBar.open(`Successful`, 'Ok', {
         duration: 3000
       })
+      this.ngOnInit();
     }, err => {
       console.log(err);
     })

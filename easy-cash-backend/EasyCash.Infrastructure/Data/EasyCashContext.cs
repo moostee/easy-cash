@@ -10,8 +10,7 @@ public class EasyCashContext : DbContext
 {
     public EasyCashContext(DbContextOptions options) : base(options)
     {
-        if (Database.IsRelational())
-            Database.Migrate();
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

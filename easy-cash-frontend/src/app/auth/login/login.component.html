@@ -28,7 +28,7 @@
 
                 <button *ngIf="!showSpinner" mat-raised-button [disabled]='!loginFormGroup.valid'
                     (click)="login(loginFormGroup.value)">Login</button>
-                <mat-spinner [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+                <mat-spinner style="align-self: center;" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
             </form>
         </mat-card>
     </div>

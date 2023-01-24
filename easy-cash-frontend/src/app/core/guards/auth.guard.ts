@@ -11,13 +11,31 @@ export class AuthGuard implements CanActivate {
   /**
    *
    */
-  constructor(private router : Router, private tokenStorageService : TokenStorageService) {
-    
+  constructor(private router: Router, private tokenStorageService: TokenStorageService) {
+
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    let role = this.tokenStorageService.getUser().role;
+
+    if (role != undefined) {
+
+
+      if (route.data['role'] != undefined && route.data['role'] != role) {
+
+        console.log('route role ', route.data['role'])
+        console.log('user role ', role)
+
+        this.router.navigateByUrl('auth');
+        return false;
+      }
+
+      return true;
+    }
+
+    this.router.navigateByUrl('auth');
+    return false;
   }
-  
+
 }

@@ -1,8 +1,16 @@
-FROM node:latest as node
-WORKDIR /app
+
+FROM --platform=$BUILDPLATFORM node:18.13.0-bullseye-slim as builder
+
+
+RUN mkdir /project
+
+WORKDIR /project
+
+RUN npm install -g @angular/cli@15
+
+
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+
 COPY . .
-RUN npm install
-RUN npm run build --prod
-#stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/easy-cash-frontend /usr/share/nginx/html
+CMD ["ng", "serve", "--host", "0.0.0.0"]

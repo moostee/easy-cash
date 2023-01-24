@@ -2,6 +2,7 @@ using EasyCash.Middlewares;
 using EasyCash.Application;
 using EasyCash.Api;
 using EasyCash.Infrastructure;
+using EasyCash.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,14 +23,12 @@ builder.Services
 builder.Services.AddControllers();
 builder.Services.AddSwagger();
 
-var app = builder.Build();
+var app = builder.Build();//.RunMigration<EasyCashContext>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(options =>
 {
@@ -41,6 +40,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseInfrastructure();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<JwtMiddleware>();
 

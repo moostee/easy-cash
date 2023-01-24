@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { Validator } from 'fluentvalidation-ts';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.compose([
         Validators.required
       ]))
-    });
+    }, { validators: loginFormValidatior });
   }
 
 
@@ -80,3 +81,62 @@ export class LoginComponent implements OnInit {
 
 
 }
+
+//Fluent Validator
+export interface LoginFormModel {
+  emailError : string;
+  passwordError : string;
+}
+
+export class FormValidator extends Validator<LoginFormModel> {
+  constructor() {
+    super();
+
+    this.ruleFor('emailError')
+      .notEmpty()
+      .withMessage("email is required");
+
+    this.ruleFor('emailError')
+      .emailAddress()
+      .withMessage("please enter a valid email address");
+
+    this.ruleFor('passwordError')
+      .notEmpty()
+      .withMessage("password is required");
+
+    this.ruleFor('passwordError')
+      .minLength(8)
+      .matches(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'))      
+      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
+  }
+}
+
+
+export const loginFormValidatior : ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+  const formEmail = control.get('email');
+  const formPassword = control.get('password');
+
+  let fluentValidator = new FormValidator();
+
+  let loginForm : LoginFormModel = {
+    emailError : formEmail?.value,
+    passwordError : formPassword?.value
+  };
+
+  let isValid = fluentValidator.validate(loginForm);
+
+  console.log(isValid);
+
+  if(Object.keys(isValid).length !== 0)
+  {
+    return {
+      emailError : isValid.emailError,
+      passwordError : isValid.passwordError,
+      notmatched : true
+    }
+  }
+
+  return null;
+
+};

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { throwError, timeout } from 'rxjs';
 import { CreateLoan } from 'src/app/core/interfaces/Loan';
 import { LoanService } from 'src/app/core/services/loan.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -23,7 +24,8 @@ export class LoanApplicationComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private _loanService: LoanService,
-    private _tokenService: TokenStorageService) { }
+    private _tokenService: TokenStorageService,
+    private router : Router) { }
 
   ngOnInit(): void {
 
@@ -56,7 +58,11 @@ export class LoanApplicationComponent implements OnInit {
       this.newApplicationForm.reset();
       this._snackBar.open(`Successfull`, 'Ok', {
         duration: 3000
-      })
+      });
+      setTimeout(() => {
+        this.router.navigateByUrl('user')
+      }, 3000);
+      
     }, err => {
       //throwError(err);
       console.log(err);

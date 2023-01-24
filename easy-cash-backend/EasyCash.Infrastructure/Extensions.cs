@@ -7,6 +7,8 @@ using EasyCash.Domain.Entity;
 using EasyCash.Infrastructure.Data;
 using EasyCash.Infrastructure.Data.Repository;
 using EasyCash.Infrastructure.Data.UnitOfWork;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 
 namespace EasyCash.Infrastructure;
 
@@ -31,5 +33,22 @@ public static class Extensions
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         return services;
+    }
+
+    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
+    {
+
+        try
+        {
+            var context = app.ApplicationServices.GetService<EasyCashContext>();
+            context.Database.Migrate();
+        }
+        catch (System.Exception ex)
+        {
+            var logger = app.ApplicationServices.GetRequiredService<ILogger<EasyCashContext>>();
+            logger.LogError(ex, "An error occurred while migrating the database.");
+            // TODO
+        }
+        return app;
     }
 }
