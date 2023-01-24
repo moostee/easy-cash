@@ -6,13 +6,18 @@
                 <span>Welcome</span>
             </mat-toolbar>
             <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="loginFormGroup">
+                <mat-label matError *ngIf="!loginFormGroup.valid && (loginFormGroup.get('email')?.touched || loginFormGroup.get('email')?.dirty)">
+                    {{this.loginFormGroup.errors?.['emailError']}}
+                </mat-label>
                 <mat-form-field>
                     <input matInput type="email" placeholder="Email" formControlName="email">
                 </mat-form-field>
-
+                <mat-label  matError *ngIf="!loginFormGroup.valid && (loginFormGroup.get('password')?.touched || loginFormGroup.get('password')?.dirty)">
+                    {{this.loginFormGroup.errors?.['passwordError']}}
+                </mat-label>
                 <mat-form-field *ngIf="!fieldTextType" class="full-width" appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input type="password" formControlName="password" matInput formControlName="password">
+                    <input type="password" formControlName="password" matInput>
                     <button matSuffix mat-icon-button (click)="toggleFieldTextType()">
                         <mat-icon>lock_open</mat-icon>
                     </button>

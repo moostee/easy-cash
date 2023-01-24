@@ -93,21 +93,12 @@ export class FormValidator extends Validator<LoginFormModel> {
     super();
 
     this.ruleFor('emailError')
-      .notEmpty()
-      .withMessage("email is required");
-
-    this.ruleFor('emailError')
       .emailAddress()
-      .withMessage("please enter a valid email address");
+      .withMessage("Please enter a valid email address");
 
     this.ruleFor('passwordError')
-      .notEmpty()
-      .withMessage("password is required");
-
-    this.ruleFor('passwordError')
-      .minLength(8)
-      .matches(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'))      
-      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
+      .matches(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{8,16}$'))      
+      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number');
   }
 }
 
@@ -116,6 +107,8 @@ export const loginFormValidatior : ValidatorFn = (control: AbstractControl): Val
 
   const formEmail = control.get('email');
   const formPassword = control.get('password');
+
+  //console.log(control);
 
   let fluentValidator = new FormValidator();
 
@@ -126,7 +119,7 @@ export const loginFormValidatior : ValidatorFn = (control: AbstractControl): Val
 
   let isValid = fluentValidator.validate(loginForm);
 
-  console.log(isValid);
+  //console.log(isValid);
 
   if(Object.keys(isValid).length !== 0)
   {
