@@ -12,7 +12,8 @@ import { LoanApplicationComponent } from '../loan-application/loan-application.c
 })
 export class LoanUserComponent implements OnInit {
 
-  userWallet! : Wallet;
+  userWallet? : Wallet;
+  
   
 
   constructor(private dialog: MatDialog,
@@ -20,7 +21,9 @@ export class LoanUserComponent implements OnInit {
     private _tokenService : TokenStorageService) { }
 
   ngOnInit(): void {
+
     this.getUserWallet();
+
   }
 
   onCreate() {

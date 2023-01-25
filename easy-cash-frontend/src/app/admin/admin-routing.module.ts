@@ -11,7 +11,6 @@ const routes: Routes = [
     children: [
       { path: 'loans', component: LoansComponent },
       { path: 'users', component: UsersComponent },
-      //{ path: 'dashboard', component: ServicesComponent },
       { path: '', redirectTo: '/admin/loans', pathMatch: 'full' }
     ]
   }

@@ -10,14 +10,16 @@ public class EasyCashContext : DbContext
 {
     public EasyCashContext(DbContextOptions options) : base(options)
     {
-        
+        if (Database.IsRelational())
+            Database.Migrate();
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var loanUser = User.Create(name: "Jane Doe", email: "janedoe@gmail.com", password: BCrypt.Net.BCrypt.HashPassword("P155w@rd"), role: Role.USER, id: 2);
         var adminUser = User.Create(name: "John Doe", email: "johndoe@gmail.com", password: BCrypt.Net.BCrypt.HashPassword("P1ssw@rd"), role: Role.ADMIN, id: 1);
-        
+
         modelBuilder.Entity<User>().HasData
                (adminUser, loanUser);
 

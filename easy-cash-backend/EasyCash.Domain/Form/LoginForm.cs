@@ -23,8 +23,8 @@ public class LoginFormValidator : AbstractValidator<LoginForm>
 {
     public LoginFormValidator()
     {
-        RuleFor(x => x.Email).NotEmpty().WithMessage("email is required");
-        RuleFor(x => x.Password).NotEmpty().WithMessage("password is required");
+        RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("Please enter a valid email address");
+        RuleFor(x => x.Password).NotEmpty().Matches("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$").WithMessage("Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
     }
 }
 

@@ -82,6 +82,9 @@ export class LoginComponent implements OnInit {
 
 }
 
+
+
+
 //Fluent Validator
 export interface LoginFormModel {
   emailError : string;
@@ -97,8 +100,8 @@ export class FormValidator extends Validator<LoginFormModel> {
       .withMessage("Please enter a valid email address");
 
     this.ruleFor('passwordError')
-      .matches(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{8,16}$'))      
-      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number');
+      .matches(new RegExp('(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$'))      
+      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
   }
 }
 
@@ -108,8 +111,6 @@ export const loginFormValidatior : ValidatorFn = (control: AbstractControl): Val
   const formEmail = control.get('email');
   const formPassword = control.get('password');
 
-  //console.log(control);
-
   let fluentValidator = new FormValidator();
 
   let loginForm : LoginFormModel = {
@@ -118,8 +119,6 @@ export const loginFormValidatior : ValidatorFn = (control: AbstractControl): Val
   };
 
   let isValid = fluentValidator.validate(loginForm);
-
-  //console.log(isValid);
 
   if(Object.keys(isValid).length !== 0)
   {

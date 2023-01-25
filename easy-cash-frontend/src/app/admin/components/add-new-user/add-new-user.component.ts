@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Validator } from 'fluentvalidation-ts';
 import { CreateUser } from 'src/app/core/interfaces/User';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -47,7 +48,7 @@ export class AddNewUserComponent implements OnInit {
       isActive: new FormControl(false, Validators.compose([
         Validators.required
       ]))
-    }, { validators: passwordMatchingValidatior })
+    }, { validators: createUserValidator })
 
   }
 
@@ -70,13 +71,13 @@ export class AddNewUserComponent implements OnInit {
 
       this.newUserFormGroup.reset();
 
-      console.log(result)
+      //console.log(result)
       this._snackBar.open(`Successfully added ${form.name}`, 'Ok', {
         duration: 3000
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/users');
-      }, 3000);
+
+
+      this.router.navigateByUrl('admin/users');
 
     },
       err => {
@@ -86,10 +87,79 @@ export class AddNewUserComponent implements OnInit {
 
 }
 
-export const passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+// export const passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+//   const password = control.get('password');
+//   const confirmPassword = control.get('confirmPassword');
+
+//   return password?.value === confirmPassword?.value ? null : { notmatched: true };
+// };
+
+
+
+
+export class FormValidator extends Validator<CreateUser> {
+  constructor() {
+    super();
+
+    this.ruleFor('name')
+      .notEmpty()
+      .withMessage("name is required");
+
+    this.ruleFor('email')
+      .emailAddress()
+      .withMessage('please enter a valid email address');
+
+    this.ruleFor('password')
+      .matches(new RegExp('(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$'))
+      .withMessage('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
+
+    this.ruleFor('confirmPassword')
+      .must((value, model) => model.password == value)
+      .withMessage('please enter the same password value');
+
+    this.ruleFor('role')
+      .greaterThanOrEqualTo(1)
+      .withMessage('please choose a valid role')
+      .lessThanOrEqualTo(2)
+      .withMessage('please choose a valid role');
+  }
+}
+
+
+export const createUserValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+  const name = control.get('name');
+  const email = control.get('email');
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
+  const role = control.get('role');
 
-  return password?.value === confirmPassword?.value ? null : { notmatched: true };
+  let fluentValidator = new FormValidator();
+
+  let createUserForm: CreateUser = {
+    name: name?.value,
+    email: email?.value,
+    password: password?.value,
+    confirmPassword: confirmPassword?.value,
+    role: parseInt(role?.value),
+    isActive: false
+  };
+
+  let isValid = fluentValidator.validate(createUserForm);
+
+  if (Object.keys(isValid).length !== 0) {
+    return {
+      nameError: isValid.name,
+      emailError: isValid.email,
+      passwordError: isValid.password,
+      confirmPasswordError: isValid.confirmPassword,
+      roleError: isValid.role,
+      notmatched: true
+    }
+  }
+
+  return null;
+
 };
+
 

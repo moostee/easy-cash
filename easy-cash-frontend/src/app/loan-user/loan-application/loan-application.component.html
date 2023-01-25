@@ -1,25 +1,30 @@
-<h2> New Loan Application</h2>
+<form  fxLayoutAlign="stretch" fxLayout="column" [formGroup]="newApplicationForm" class="remove-padding">
 
-<form class="example-form" [formGroup]="newApplicationForm">
-    <p>
-        <strong> Percentage 4% </strong>
-    </p>
-    <p>
-        <mat-form-field>
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">
+            <span>New Loan Application</span>
+        </mat-toolbar>
+       
+        <mat-form-field appearance="fill">
             <mat-label>Loan Reason</mat-label>
             <input formControlName="reason" matInput placeholder="Placeholder">
         </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field >
+        <mat-label matError *ngIf="!newApplicationForm.valid && (newApplicationForm.get('reason')?.touched || newApplicationForm.get('reason')?.dirty)">
+            {{this.newApplicationForm.errors?.['reasonError']}}
+        </mat-label>
+        
+        <mat-form-field appearance="fill">
             <mat-label>Amount</mat-label>
             <input matInput formControlName="loanAmount" placeholder="loan amount">
         </mat-form-field>
-    </p>
-    <p>
-
+        <mat-label matError *ngIf="!newApplicationForm.valid && (newApplicationForm.get('loanAmount')?.touched || newApplicationForm.get('loanAmount')?.dirty)">
+            {{this.newApplicationForm.errors?.['loanAmountError']}}
+        </mat-label>
         <button *ngIf="!showSpinner" mat-raised-button color="primary" [disabled]='!newApplicationForm.valid'
-            (click)="createLoan(newApplicationForm.value)">Apply</button>
-        <mat-spinner [diameter]="50" *ngIf="showSpinner"></mat-spinner>
-    </p>
+            (click)="createLoan(newApplicationForm.value)">Apply
+        </button>
+        <mat-spinner style="align-self: center;" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+    </mat-card>
+
+   
 </form>

@@ -25,8 +25,8 @@ public class UserFormValidator : AbstractValidator<UserForm>
 {
     public UserFormValidator()
     {
-        RuleFor(x => x.Email).NotEmpty().WithMessage("email is required");
-        RuleFor(x => x.Password).NotEmpty().WithMessage("password is required");
+        RuleFor(x => x.Email).EmailAddress().WithMessage("please enter a valid email address");
+        RuleFor(x => x.Password).Matches("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$").WithMessage("Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character");
         RuleFor(x => x.Name).NotEmpty().WithMessage("name is required");
         RuleFor(x => x.Role).NotEmpty().WithMessage("role is required");
     }
@@ -62,7 +62,7 @@ public class ActivateOrDeActivateUserFormValidator : AbstractValidator<ActivateO
 {
     public ActivateOrDeActivateUserFormValidator()
     {
-        RuleFor(x => x.UserId).NotEmpty().WithMessage("email is required");
+        RuleFor(x => x.UserId).NotEmpty().WithMessage("userId is required");
     }
 }
 

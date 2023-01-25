@@ -14,7 +14,8 @@ internal class GetAllLoansQueryHandler : IQueryHandler<GetAllLoansQuery, Result<
     }
     public async Task<Result<List<Loans>>> Handle(GetAllLoansQuery request, CancellationToken cancellationToken)
     {
-        var loans = await _untiOfWork.LoanRepository.GetAllAsync();
+        var loans = await _untiOfWork.LoanRepository.GetAllLoansAndUserDetailsAsync();
+        
         return GetAllLoansResult.Success(loans.ToList());
     }
 }

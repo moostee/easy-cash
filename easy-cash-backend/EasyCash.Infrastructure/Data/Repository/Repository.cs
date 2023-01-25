@@ -8,7 +8,7 @@ using EasyCash.Shared.Entity;
 
 internal class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : BaseEntity<TId>
 {
-    private readonly EasyCashContext _context;
+    protected readonly EasyCashContext _context;
     public Repository(EasyCashContext context)
     {
         _context = context;

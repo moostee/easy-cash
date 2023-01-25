@@ -1,35 +1,41 @@
-<form class="example-form" [formGroup]="newUserFormGroup">
+<form  fxLayoutAlign="stretch" fxLayout="column" [formGroup]="newUserFormGroup" class="remove-padding">
 
-    <table class="full-width" cellspacing="0">
-        <tr>
-            <td>                
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input type="text" matInput formControlName="name">
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput formControlName="email">
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">
+            <span>Add User</span>
+        </mat-toolbar>
 
-    <p>
-        <!-- <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Username</mat-label>
-            <input type="text" matInput formControlName="username" placeholder="username">
-        </mat-form-field> -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="name">
+        </mat-form-field>
+        <mat-label matError *ngIf="!newUserFormGroup.valid && (newUserFormGroup.get('name')?.touched || newUserFormGroup.get('name')?.dirty)">
+            {{this.newUserFormGroup.errors?.['nameError']}}
+        </mat-label>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email">
+        </mat-form-field>
+        <mat-label matError *ngIf="!newUserFormGroup.valid && (newUserFormGroup.get('email')?.touched || newUserFormGroup.get('email')?.dirty)">
+            {{this.newUserFormGroup.errors?.['emailError']}}
+        </mat-label>
+
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName="password" placeholder="********">
         </mat-form-field>
+        <mat-label matError *ngIf="!newUserFormGroup.valid && (newUserFormGroup.get('password')?.touched || newUserFormGroup.get('password')?.dirty)">
+            {{this.newUserFormGroup.errors?.['passwordError']}}
+        </mat-label>
+
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Retype Password</mat-label>
             <input type="password" matInput formControlName="confirmPassword" placeholder="*******">
         </mat-form-field>
+        <mat-label matError *ngIf="!newUserFormGroup.valid && (newUserFormGroup.get('confirmPassword')?.touched || newUserFormGroup.get('confirmPassword')?.dirty)">
+            {{this.newUserFormGroup.errors?.['confirmPasswordError']}}
+        </mat-label>
 
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Role</mat-label>
@@ -39,10 +45,16 @@
                 <mat-option [value]=2>User</mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-label matError *ngIf="!newUserFormGroup.valid && (newUserFormGroup.get('role')?.touched || newUserFormGroup.get('role')?.dirty)">
+            {{this.newUserFormGroup.errors?.['roleError']}}
+        </mat-label>
 
-        <input type="hidden" name="isActive" formControlName="isActive" value="false">
+        <input type="hidden" name="isActive" formControlName="isActive" value="false">        
        
-    </p>
-    <button *ngIf="!showSpinner" mat-raised-button color="primary" [disabled]='!newUserFormGroup.valid' (click)="addNewUser(newUserFormGroup.value)">Save</button>
-    <mat-spinner [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+
+        <button *ngIf="!showSpinner" mat-raised-button color="primary" [disabled]='!newUserFormGroup.valid' (click)="addNewUser(newUserFormGroup.value)">Save</button>
+        <mat-spinner style="align-self: center;" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+    </mat-card>
+
+   
 </form>

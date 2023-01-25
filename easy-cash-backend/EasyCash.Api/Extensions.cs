@@ -16,7 +16,7 @@ public static class Extensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Quick Loan Service", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "EasyCash Service", Version = "v1" });
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
@@ -68,23 +68,5 @@ public static class Extensions
 
         return services;
     }
-
-    // public static WebApplication RunMigration<T>(this WebApplication webApplication) where T : DbContext
-    // {
-    //     using (var scope = webApplication.Services.CreateScope())
-    //     {
-    //         var services = scope.ServiceProvider;
-    //         try
-    //         {
-    //             var db = services.GetRequiredService<T>();
-    //             db.Database.Migrate();
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             var logger = services.GetRequiredService<ILogger<Program>>();
-    //             logger.LogError(ex, "An error occurred while migrating the database.");
-    //         }
-    //     }
-    //     return webApplication;
-    // }
+    
 }

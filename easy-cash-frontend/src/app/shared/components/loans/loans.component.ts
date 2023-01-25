@@ -25,7 +25,8 @@ export class LoansComponent implements OnInit {
 
   loans: Loans[] = [];
 
-  displayColumn: String[] = ["loanAmount", "status", 'startDate', 'endDate', "actions"];
+  // displayColumn: String[] = ["loanAmount", "status", 'startDate', 'endDate', "actions"];
+  displayColumn: String[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -35,7 +36,7 @@ export class LoansComponent implements OnInit {
 
   userId: number = 0;
   userRole: number = 0;
-
+  isAdmin = false;
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
     private dialog: MatDialog,
@@ -48,7 +49,10 @@ export class LoansComponent implements OnInit {
     this.userRole = this._tokenService.getUser().role;
     this.userId = this._tokenService.getUser().id;
 
+    this.displayColumn = this.userRole == Role.LoanUser ? ["loanAmount", "status", 'startDate', 'endDate', "actions"] : ['name',"loanAmount", "status", 'startDate', 'endDate', "actions"];
+
     if (this.userRole == Role.LoanUser) {
+
       this._loanService.getLoanByUserId(this.userId).subscribe(result => {
         this.loans = result.responseObject;
 
@@ -62,6 +66,7 @@ export class LoansComponent implements OnInit {
         console.log(err);
       });
     } else {
+      this.isAdmin = true;
       this._loanService.getAllLoans().subscribe(result => {
         this.loans = result.responseObject;
         this.listData = new MatTableDataSource(this.loans);
