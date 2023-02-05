@@ -1,3 +1,13 @@
+# Proposed Project MIT ( EasyCash Service )
+
+Creating a service to facilitate loan application 
+
+This platform provides the ability for customers anywhere to apply for loan facilities.
+
+Today, retail banking makes up a very high percent of nigerian banks.
+
+Fintechs have also tapped into this opportunity.
+
 
 #EasyCash Service
 
@@ -60,7 +70,7 @@ Quick loan service consists of the following features:
 ## [](https://github.com/moostee/easy-cash#scope-of-my-solution)[](https://github.com/moostee/easy-cash#scope)Scope of my solution
 
 #### [](https://github.com/moostee/easy-cash#backend)[](https://github.com/moostee/easy-cash#scope-backend)Backend
-
+- .NET 7/.NET 6
 -   Clean architecture for project structure
 -   Domain Driven Design
 -   Mediator Pattern
