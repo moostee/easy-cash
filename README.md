@@ -1,7 +1,8 @@
 
 #EasyCash Service
 
-This is a minimalist service of a loan application I developed for my previous employer.
+This is a minimalist service of a loan application.
+
 
 Its a system that manages and disburses loans to application user and the admin can manage user/loans and loan configurations.
 
